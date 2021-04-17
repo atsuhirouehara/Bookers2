@@ -1,0 +1,21 @@
+<h1>Editing Book</h1>
+
+<% if @book && @book.errors.any? %>
+    <%= pluralize(@book.errors.count, "error") %> prohibited this obj from being saved:<br>
+     <% @book.errors.full_messages.each do |message| %>
+        <%= message %><br>
+  <% end %>
+<% end %>
+
+<%= form_with model:@book, local:true do |f| %>
+
+  <h4>Title</h4>
+  <label for="inputTitle"></label>
+  <%= f.text_field :title, autofocus: true, id:"inputTitle" %>
+  <h4>Body</h4>
+  <label for="inputBody"></label>
+  <%= f.text_area :body, autofocus: true, id:"inputBody" %>
+  <%= f.submit 'Update Book', class: "btn btn-secondary" %>
+<% end %>
+
+<p><%= link_to "Show", book_path %> | <%= link_to "Back", books_path %></p>

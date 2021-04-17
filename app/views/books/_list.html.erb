@@ -1,0 +1,26 @@
+<% if book && book.errors.any? %>
+    <%= pluralize(book.errors.count, "error") %> prohibited this obj from being saved:<br>
+     <% book.errors.full_messages.each do |message| %>
+        <%= message %><br>
+  <% end %>
+<% end %>
+
+<div class="profile-container">
+    <h1>User info</h1>
+  <%= attachment_image_tag user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg", size: '100x100' %>
+    <h3 class="profile-name"> name <%= user.name %></h3>
+  　<h3 class="profile-introduction"> introduction  <%= user.introduction %></h3>
+    <%= link_to edit_user_path(user) do %>
+    <span class="btn btn-outline-secondary btn-block fas fa-user-cog"></span>
+    <% end %>
+    
+  <h1>New book</h1>
+
+<%= form_with model:Book.new, local:true do |f| %>
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  <h4>Body</h4>
+  <%= f.text_area :body %>
+  <%= f.submit 'Create Book', class: "btn btn-secondary" %>
+<% end %>
+</div>
